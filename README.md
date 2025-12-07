@@ -6,7 +6,13 @@ The quiz helps distinguish correct French terms from common distractors, anglici
 
 ## Live Demo
 Try it here:
+
 **[https://ashleysally00.github.io/fr-fr-ui-quiz/](https://ashleysally00.github.io/fr-fr-ui-quiz/)**
+
+## Dataset  
+The terminology list used in this quiz is available as a CSV file:
+
+**[terms.csv](terms.csv)**
 
 ## Technical Overview
 * **Architecture:** Zero-dependency Single Page Application (SPA).
