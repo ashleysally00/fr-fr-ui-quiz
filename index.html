@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>French Tech Terminology Quiz</title>
+    <style>
+        :root {
+            --primary: #3b82f6; /* Blue for France */
+            --success: #16a34a;
+            --error: #dc2626;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--primary); }
+        p.subtitle { color: #64748b; font-size: 0.9rem; }
+
+        .card {
+            background: var(--card);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .progress {
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: #64748b;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .term-display {
+            margin-bottom: 30px;
+        }
+
+        .category-tag {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .english-term {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .context-hint {
+            font-style: italic;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        button.option-btn {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        button.option-btn:hover {
+            border-color: var(--primary);
+            background-color: #f0f9ff;
+        }
+
+        button.option-btn.correct {
+            background-color: #dcfce7;
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        button.option-btn.wrong {
+            background-color: #fee2e2;
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback-area {
+            margin-top: 20px;
+            min-height: 60px;
+            display: none;
+        }
+
+        .next-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .next-btn:hover { background: #1d4ed8; }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>French Tech Terminology</h1>
+        <p class="subtitle">Vocabulary Drill (UI/UX & Hardware)</p>
+    </header>
+
+    <div class="card" id="quiz-card">
+        <div class="progress">
+            <span id="score">Score: 0</span>
+            <span id="counter">1 / 50</span>
+        </div>
+
+        <div class="term-display">
+            <span class="category-tag" id="category">Category</span>
+            <div class="english-term" id="question">Loading...</div>
+            <div class="context-hint" id="context"></div>
+        </div>
+
+        <div class="options-grid" id="options">
+            </div>
+
+        <div class="feedback-area" id="feedback">
+            <div id="explanation" style="margin-bottom:10px;"></div>
+            <button class="next-btn" onclick="nextQuestion()">Next Term</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Data curated for Standard Tech French (France/International)
+    const database = [
+        // --- HARDWARE ---
+        { en: "Computer", fr: "L'ordinateur", alt: ["La machine", "Le PC", "Le computer"], cat: "Hardware", hint: "The general device" },
+        // UPDATED: Better distractors
+        { en: "Keyboard", fr: "Le clavier", alt: ["Les touches", "Le clavierier", "La planche"], cat: "Hardware", hint: "Input device" },
+        { en: "Mouse", fr: "La souris", alt: ["Le pointeur", "Le mulot", "Le trackpad"], cat: "Hardware", hint: "Pointing device" },
+        { en: "Screen", fr: "L'écran", alt: ["Le moniteur", "La vitre", "L'affichage"], cat: "Hardware", hint: "Visual display" },
+        { en: "Hard Drive", fr: "Le disque dur", alt: ["La mémoire", "Le stockage", "Le lecteur"], cat: "Hardware", hint: "Storage component" },
+        
+        // --- SOFTWARE & UI ---
+        { en: "Software", fr: "Le logiciel", alt: ["Le soft", "L'application", "Le programme"], cat: "General Tech", hint: "Computer programs" },
+        { en: "Download", fr: "Télécharger", alt: ["Charger", "Descendre", "Prendre"], cat: "Actions", hint: "Getting files from internet" },
+        { en: "Save", fr: "Enregistrer", alt: ["Sauver", "Garder", "Stocker"], cat: "UI Buttons", hint: "Preserving your work" },
+        { en: "Cancel", fr: "Annuler", alt: ["Arrêter", "Supprimer", "Stopper"], cat: "UI Buttons", hint: "Stop an action" },
+        // UPDATED: Simplified to "Valider"
+        { en: "Submit", fr: "Valider", alt: ["Soumettre", "Envoyer", "Passer"], cat: "UI Buttons", hint: "Finalizing a form" },
+        
+        // --- INTERNET & WEB ---
+        { en: "Browser", fr: "Le navigateur", alt: ["L'explorateur", "Le chercheur", "La fenêtre"], cat: "Software", hint: "Chrome, Firefox, Safari" },
+        { en: "Link", fr: "Le lien", alt: ["L'attache", "La connexion", "Le pont"], cat: "Internet", hint: "Hyperlink" },
+        { en: "Log in", fr: "Se connecter", alt: ["Logger", "Entrer", "S'inscrire"], cat: "Authentication", hint: "Accessing an account" },
+        { en: "Password", fr: "Le mot de passe", alt: ["Le code", "La clé", "Le sésame"], cat: "Security", hint: "Secret access phrase" },
+        { en: "Home Page", fr: "La page d'accueil", alt: ["La maison", "Le début", "La page principale"], cat: "Web Design", hint: "Main landing page" },
+        
+        // --- ADVANCED / DEV ---
+        { en: "Settings", fr: "Les paramètres", alt: ["Les réglages", "La configuration", "Les options"], cat: "UI Navigation", hint: "System preferences" },
+        { en: "Database", fr: "La base de données", alt: ["Le data", "L'entrepôt", "Le fichier"], cat: "Backend", hint: "Structured data storage" },
+        { en: "To debug", fr: "Déboguer", alt: ["Réparer", "Corriger", "Nettoyer"], cat: "Dev Lingo", hint: "Fixing code errors" },
+        { en: "Digital", fr: "Numérique", alt: ["Digital", "Virtuel", "Électronique"], cat: "General Tech", hint: "Opposite of analog" },
+        // UPDATED: Simplified to "Le cloud"
+        { en: "The Cloud", fr: "Le cloud", alt: ["Le ciel", "Le serveur", "Le nuage"], cat: "Internet", hint: "Remote servers" }
+    ];
+
+    let currentQ = 0;
+    let score = 0;
+    let shuffledDB = [];
+
+    function shuffle(array) {
+        return array.sort(() => Math.random() - 0.5);
+    }
+
+    function init() {
+        shuffledDB = shuffle([...database]); 
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        const item = shuffledDB[currentQ];
+        
+        document.getElementById('counter').innerText = `${currentQ + 1} / ${shuffledDB.length}`;
+        document.getElementById('category').innerText = item.cat;
+        document.getElementById('question').innerText = item.en;
+        document.getElementById('context').innerText = item.hint;
+        document.getElementById('feedback').style.display = 'none';
+
+        let choices = [{txt: item.fr, isCorrect: true}];
+        item.alt.forEach(alt => choices.push({txt: alt, isCorrect: false}));
+        
+        choices = shuffle(choices);
+
+        const optionsDiv = document.getElementById('options');
+        optionsDiv.innerHTML = ''; 
+
+        choices.forEach(choice => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerText = choice.txt;
+            btn.onclick = () => checkAnswer(btn, choice.isCorrect, item.fr);
+            optionsDiv.appendChild(btn);
+        });
+    }
+
+    function checkAnswer(btn, isCorrect, correctAnswer) {
+        const allBtns = document.querySelectorAll('.option-btn');
+        allBtns.forEach(b => b.disabled = true);
+
+        const feedbackArea = document.getElementById('feedback');
+        const explanation = document.getElementById('explanation');
+        feedbackArea.style.display = 'block';
+
+        if (isCorrect) {
+            btn.classList.add('correct');
+            explanation.innerHTML = `<strong>Correct !</strong> <br>"${correctAnswer}" est le bon terme.`;
+            score++;
+            document.getElementById('score').innerText = `Score: ${score}`;
+        } else {
+            btn.classList.add('wrong');
+            allBtns.forEach(b => {
+                if(b.innerText === correctAnswer) b.classList.add('correct');
+            });
+            explanation.innerHTML = `<strong>Incorrect.</strong> <br>Le terme correct est "${correctAnswer}".`;
+        }
+    }
+
+    function nextQuestion() {
+        currentQ++;
+        if (currentQ < shuffledDB.length) {
+            loadQuestion();
+        } else {
+            document.getElementById('quiz-card').innerHTML = `
+                <h2>Terminé !</h2>
+                <p>Score final: ${score} / ${shuffledDB.length}</p>
+                <button class="next-btn" onclick="location.reload()">Recommencer</button>
+            `;
+        }
+    }
+
+    init();
+
+</script>
+
+</body>
+</html>
