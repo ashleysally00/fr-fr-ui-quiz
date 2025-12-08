@@ -8,7 +8,7 @@ The quiz helps distinguish correct French terms from common distractors, anglici
 
 ## Live Demo
 
-**[Launch the App](https://ashleysally00.github.io/fr-fr-ui-quiz/)**
+**[Launch the Quiz App](https://ashleysally00.github.io/fr-fr-ui-quiz/)**
 
 **Reference Table:**  
 
