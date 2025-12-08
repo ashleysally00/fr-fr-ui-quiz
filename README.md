@@ -1,5 +1,7 @@
 # fr-fr-ui-quiz
 
+Also available in Spanish (Mexico): [es-mx-ui-quiz](https://github.com/ashleysally00/es-mx-ui-quiz)
+
 A lightweight Vanilla JS quiz app for learning **Standard French technology and UI terminology** used in UX writing, software localization, and general computing.
 
 The quiz helps distinguish correct French terms from common distractors, anglicisms, and misleading literal translations.
