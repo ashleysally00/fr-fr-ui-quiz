@@ -1,41 +1,70 @@
 # fr-fr-ui-quiz
 
-A lightweight Vanilla JS quiz app for learning Standard French tech terminology used in UI/UX, software localization, web design, and general computing.
+A lightweight Vanilla JS quiz app for learning **Standard French technology and UI terminology** used in UX writing, software localization, and general computing.
 
-The quiz helps distinguish correct French terms from common distractors, anglicisms, and misleading translations.
+The quiz helps distinguish correct French terms from common distractors, anglicisms, and misleading literal translations.
 
 ## Live Demo
-Try it here:
 
-**[https://ashleysally00.github.io/fr-fr-ui-quiz/](https://ashleysally00.github.io/fr-fr-ui-quiz/)**
+**[Launch the App](https://ashleysally00.github.io/fr-fr-ui-quiz/)**
 
-## Dataset  
-The terminology list used in this quiz is available as a CSV file:
+**Reference Table:**  
+[View French UX Terminology Reference Table](https://ashleysally00.github.io/fr-fr-ui-quiz/french-terms.html)
 
-**[terms.csv](terms.csv)**
+## Features
+
+* Distinguishes between proper French UI terminology and misleading anglicisms.
+* Covers essential categories:
+  * UI buttons and actions (Save, Submit, Cancel)
+  * Hardware terms
+  * Internet and software vocabulary
+* Zero dependencies — runs entirely in the browser.
+* Immediate feedback after every question.
 
 ## Technical Overview
-* **Architecture:** Zero-dependency Single Page Application (SPA).
-* **Stack:** HTML5, CSS3, Vanilla JavaScript (ES6+).
-* **State Management:** Local state for score and question progression.
-* **Styling:** CSS variables + responsive layout.
-* **Performance:** Instant load, no bundlers or frameworks.
+
+* **Architecture:** Zero-dependency Single Page Application (SPA)
+* **Stack:** HTML5, CSS3, Vanilla JavaScript
+* **State Management:** Tracks score and question progression
+* **Performance:** Instant load; no build tools required
 
 ## How It Works
-The app shuffles a curated dataset and dynamically generates the quiz UI. Features include:
-* Randomizing distractors per question.
-* Immediate visual feedback (CSS class toggles).
-* Explanation shown after each answer.
-* Score tracking.
-* Category labels (Hardware, UI Buttons, Internet, Dev, etc.).
+
+Each quiz question is generated through:
+
+* **Shuffling:** Random selection from the internal terminology dataset
+* **Randomized distractors:** Prevents guessing based on position
+* **Context hints:** Reinforces correct usage and meaning
+* **Local state:** Handles score and progression
 
 ## Usage
-1. Clone the repo or download the files.
-2. Open `index.html` in your browser to run the quiz locally.
-3. To customize the content, edit the `database` array directly in the `<script>` section.
 
-## Notes on Localization
-This dataset follows **Standard French** for technology (France + international), avoiding:
-* **Franglais** (e.g., *"logger"*, *"digital"*).
-* **Misleading literal translations** (e.g., *"sauver"* for Save).
-* **Slang or regional usage** unless appropriate.
+Clone or download the repository:
+
+```bash
+git clone https://github.com/ashleysally00/fr-fr-ui-quiz.git
+```
+
+Open the project and launch the quiz:
+
+```bash
+# macOS
+open index.html
+
+# Windows
+start index.html
+```
+
+Or simply drag `index.html` into your browser.
+
+## Reference Table
+
+A static reference page containing the French UX terminology used in the quiz.
+
+This page is for review only and is not part of the interactive quiz.
+
+[View French UX Terminology Reference Table](https://ashleysally00.github.io/fr-fr-ui-quiz/french-terms.html)
+
+## License
+
+This project is open source and available under the MIT License.
