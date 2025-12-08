@@ -9,7 +9,10 @@ The quiz helps distinguish correct French terms from common distractors, anglici
 **[Launch the App](https://ashleysally00.github.io/fr-fr-ui-quiz/)**
 
 **Reference Table:**  
-[View French UX Terminology Reference Table](https://ashleysally00.github.io/fr-fr-ui-quiz/terminology-fr.html)
+
+[View French UX Terminology Reference Table](https://ashleysally00.github.io/fr-fr-ui-quiz/terminology-fr.html)  
+[View French UX Phrases Reference (Level 2)](https://ashleysally00.github.io/fr-fr-ui-quiz/phrases-fr-level2.html)
+
 
 ## Features
 
@@ -64,6 +67,9 @@ A static reference page containing the French UX terminology used in the quiz.
 This page is for review only and is not part of the interactive quiz.
 
 [View French UX Terminology Reference Table](https://ashleysally00.github.io/fr-fr-ui-quiz/terminology-fr.html)
+
+[View French UX Phrases Reference (Level 2)](https://ashleysally00.github.io/fr-fr-ui-quiz/phrases-fr-level2.html)
+
 
 ## License
 
